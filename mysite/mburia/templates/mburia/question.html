@@ -1,0 +1,96 @@
+{% extends "mburia/base.html" %}
+
+{% block title %}Question detail{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		{% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+		{% endfor %}
+		{% endif %}
+		<div class="col-md-7">
+			<h2 class="page-header">{{ question.question_title }}</h2>
+			<p class="question-detail-text">{{ question.question_body|linebreaks }}</p>
+			<div class="question-info">
+				<p class="pull-right"><a class="btn btn-success" data-target="#myModal" data-toggle="modal">Comment</a></p>
+				<p class="question-author">Question posed by <span>{{ question.account }}</span></p>
+				<p><span>Published on: {{ question.date_asked }}</span></p>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Responses</h3>
+					{% if question.mburia_answer_set.all %}
+					{% for answer in question.mburia_answer_set.all %}
+					<div class="answer-box">
+						<p class="answer-detail-text">{{ answer.answer_text|linebreaks }}</p>
+						<div class="question-info">
+							<p class="question-author">Response by <span>{{ answer.answer_account }}</span></p>
+							<p class="votes"><a href="{% url 'mburia:up_vote' pk=answer.pk question=question.pk %}"><span class="glyphicon glyphicon-thumbs-up"></span></a> 
+							{% for vote in up_votes %}
+							{% if vote.answer == answer.pk %}
+							{{ vote.up_vote }} 
+							{% endif %}
+							{% endfor %}
+							<a href="{% url 'mburia:down_vote' pk=answer.pk question=question.pk %}"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+							{% for vote in down_votes %}
+							{% if vote.answer == answer.pk %}
+							{{ vote.down_vote }} 
+							{% endif %}
+							{% endfor %}
+							 </p>
+							<p><span>Responded on: {{ answer.date_answered }}</span></p>
+						</div>
+					</div>
+					{% endfor %}
+					{% else %}
+					<div class="answer-box">
+						<h4 class="text-center" style="color: red;">No responses to display for this question</h4>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-md-offset-2 col-md-3">
+			<h2 class="page-header">Categories</h2>
+			<ul class="list-unstyled category-list">
+				{% if categories %}
+				{% for category in categories %}
+				<li><a href="{% url 'mburia:category_questions' category.pk %}">{{ category.category_name }}</a></li>
+				{% endfor %}
+				{% endif %}
+			</ul>
+		</div>
+		
+	</div>
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Give your two cents</h4>
+				</div>
+				<div class="modal-body">
+					<form method="POST" action="{% url 'mburia:submit_answer' question.pk %}">{% csrf_token %}
+						<div class="form-group">
+							<label for="answer">Your answer</label>
+							<textarea class="form-control" rows="10" name="answer_text"></textarea>
+						</div>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-success">Submit</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

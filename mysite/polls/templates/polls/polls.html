@@ -1,0 +1,21 @@
+{% extends "mburia/base.html" %}
+
+{% block title %}Polls{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<h2 class="text-center page-header">Recent Polls</h2>
+	<ul class="list-unstyled">
+		{% for question in questions %}
+		<li><a href="{% url 'polls:question_detail' question.pk %}">{{ question.question_text }}</a></li>
+		<hr>
+		{% endfor %}
+	</ul>
+</div>
+
+{% endblock %}
+
+
+		
+

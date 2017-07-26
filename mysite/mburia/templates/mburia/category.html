@@ -1,0 +1,37 @@
+{% extends "mburia/base.html" %}
+
+{% block title %}Category{% endblock %}
+
+{% block content %}
+
+<div class="col-md-12">
+	<div class="col-md-7">
+		<h2 class="page-header">Recent Questions</h2>
+		{% if questions%}
+		{% for question in questions %}
+		<div class="question-box">
+			<h2 class="question-title"><a href="{% url 'mburia:question_detail' question.pk %}">{{ question.question_title }}</a></h2>
+			<p class="question-detail-text">{{ question.question_body|slice:":255"|linebreaks }}</p>
+			<div class="question-info">
+				<p class="question-author">Question posed by <span>{{ question.account }}</span></p>
+				<p class="votes"><span class="glyphicon glyphicon-thumbs-up"></span> 25 <span class="glyphicon glyphicon-thumbs-down"></span> 10</p>
+				<p><span>Published on: {{ question.date_asked }}</span></p>
+			</div>
+		</div>
+		{% endfor %}
+		{% endif %}
+	</div>
+	<div class="col-md-offset-2 col-md-3">
+		<h2 class="page-header">Categories</h2>
+		<ul class="list-unstyled category-list">
+			{% if categories %}
+			{% for category in categories %}
+			<li><a href="{% url 'mburia:category_questions' category.pk %}">{{ category.category_name }}</a></li>
+			{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+	
+</div>
+
+{% endblock %}

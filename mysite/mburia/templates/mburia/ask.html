@@ -1,0 +1,56 @@
+{% extends "mburia/base.html" %}
+
+{% block title %}Mburia - Ask Question{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<div class="col-md-12">
+		<div class="col-md-7">
+			<h3 class="page-header">Get the answers you have been searching for</h3>
+			<div class="panel panel-default">
+				<div class="panel-heading">Question details</div>
+				<div class="panel-body">
+					<form action="{% url 'mburia:submit_query' %}" method="POST">{% csrf_token %}
+						<div class="form-group">
+							<label for="question-category">Question Category</label>
+							<select class="form-control" name="category">
+								<option value="" selected disabled>--Select a category--</option>
+								{% if categories %}
+								{% for category in categories %}
+								<option value="{{category.pk}}">{{ category.category_name }}</option>
+								{% endfor %}
+								{% endif %}
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="question-title">Question Title</label>
+							<input type="text" name="question_title" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="question-title">Question Body</label>
+							<textarea name="question_body" class="form-control" rows="10"></textarea>
+						</div>
+				</div>
+				<div class="panel-footer">
+					<button type="reset" class="btn btn-danger">Cancel</button>
+					<button type="submit" class="btn btn-primary">Submit query</button>
+				</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-offset-2 col-md-3">
+			<h3 class="page-header">Recent Questions</h3>
+			<ul class="list-unstyled">
+				{% if questions%}
+				{% for question in questions %}
+				<li class="question-title-sidebar"><a href="{% url 'polls:question_detail' question.pk %}">{{ question.question_text }}</a><br><span>Published on: {{ question.pub_date }}</span></li>
+				<hr>
+				{% endfor %}
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

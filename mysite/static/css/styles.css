@@ -1,0 +1,180 @@
+header{
+	background-color: green;
+	color: #fff;
+	height: 70px;
+	width: 100%;
+}
+
+#header-inner{
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.logo-area{
+	float: left;
+	padding: 5px;
+}
+
+.logo-area h3 a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.top-nav{
+	float: right;
+	padding: 20px;
+}
+
+.top-nav ul li{
+	display: inline-block;
+}
+
+.top-nav ul li a{
+	color: #fff;
+	font-size: 16px;
+	padding-left: 10px;
+	text-decoration: none;
+}
+
+.top-nav ul li a:hover{
+	font-weight: bold;
+}
+
+.logged-user{
+	margin-left: 15px;
+	font-size: 20px;
+	border: 1px solid #fff;
+	border-radius: 10%;
+}
+
+.login-panel{
+	margin-top: 20%
+}
+
+.no-account-prompt{
+	line-height: 3;
+}
+
+.register-panel{
+	margin-top: 20%
+}
+
+.help-errors{
+	font-size: 14px;
+	color: red;
+}
+
+
+.question-title-sidebar a{
+	font-size: 20px;
+	font-weight: bold;
+	color: #000;
+}
+
+.category-list li a{
+	color: #000;
+	font-size: 16px;
+	line-height: 2.1;
+}
+
+
+.question-title-sidebar span{
+	font-weight: normal;
+	font-size: 16px;
+	color: green;
+}
+
+.question-box{
+	padding-top: 10px;
+	padding-bottom: 25px;
+}
+
+.question-box a{
+	font-size: 25px;
+	font-weight: bold;
+	color: #000;
+}
+
+.question-box span{
+	font-weight: normal;
+	font-size: 16px;
+	color: green;
+}
+
+.question-box-category{
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 0.5;
+	margin-bottom: -10px;
+	color: #999;
+}
+
+.question-author{
+	font-size: 16px;
+	color: green;
+}
+
+.question-author span{
+	font-size: 16px;
+	color: #000;
+	font-weight: bold;
+}
+
+.question-detail-text{
+	font-size: 16px;
+	color: #000;
+}
+
+.question-info p{
+	line-height: 2.0;
+}
+
+.question-info .votes{
+	float: right;
+}
+
+.votes span{
+	padding-left: 15px;
+}
+
+.votes .glyphicon-thumbs-up{
+	color: green;
+}
+
+
+.votes .glyphicon-thumbs-down{
+	color: red;
+}
+
+.answer-box{
+	padding: 10px;
+}
+
+.choice-list{
+	font-size: 16px;
+	color: green;
+}
+
+.votes-tally{
+	color: red;
+}
+
+.votes{
+	font-size: 16px;
+	margin-bottom: 5%;
+}
+
+.voting{
+	padding: 10px 0 20px 0;
+}
+
+footer{
+	height: 50px;
+	background-color: green;
+	color: #fff;
+	padding-top: 10px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: relative;
+}
